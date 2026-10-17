@@ -5,6 +5,10 @@ This is an independent implementation inspired by the documented pre/post
 emphasis workflow of the Overstayer M-A-S. It includes original DSP and vector
 rack artwork; no proprietary code, artwork, or branding is distributed.
 
+![Ivory Drive Classic, rendered by the native JUCE editor](Docs/ValidationArtifacts/IvoryDrive-Classic.png)
+
+[Extended interface](Docs/ValidationArtifacts/IvoryDrive-Extended.png)
+
 ## Processing
 
 - Classic and Extended interfaces share the nonlinear engine.

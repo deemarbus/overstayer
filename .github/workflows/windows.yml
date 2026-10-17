@@ -33,8 +33,18 @@ jobs:
           if ((Get-FileHash pluginval.zip -Algorithm SHA256).Hash -ne $expected) { throw "pluginval checksum mismatch" }
           Expand-Archive pluginval.zip -DestinationPath pluginval
           New-Item -ItemType Directory -Force -Path TestResults/pluginval | Out-Null
-          & ./pluginval/pluginval.exe --strictness-level 5 --random-seed 66701 --timeout-ms 120000 --output-dir TestResults/pluginval --validate "Builds/Windows/IvoryDrive_artefacts/Release/VST3/Ivory Drive.vst3"
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $arguments = '--strictness-level 5 --random-seed 66701 --timeout-ms 120000 --output-dir "' + $PWD + '/TestResults/pluginval" --validate "' + $PWD + '/Builds/Windows/IvoryDrive_artefacts/Release/VST3/Ivory Drive.vst3"'
+          # pluginval is a Windows GUI executable: wait explicitly and read its
+          # real exit code instead of relying on an unset $LASTEXITCODE.
+          $validation = Start-Process -FilePath "$PWD/pluginval/pluginval.exe" -ArgumentList $arguments -Wait -PassThru -NoNewWindow
+          $logs = @(Get-ChildItem TestResults/pluginval -File -Filter *.txt)
+          foreach ($log in $logs) { Get-Content $log.FullName }
+          if ($validation.ExitCode -ne 0) { exit $validation.ExitCode }
+          if ($logs.Count -eq 0) { throw "pluginval produced no validation log" }
+          $report = ($logs | ForEach-Object { Get-Content $_.FullName }) -join "`n"
+          foreach ($evidence in @('SUCCESS', 'Completed tests in pluginval / Audio processing', 'Completed tests in pluginval / Plugin state', 'Completed tests in pluginval / Automation')) {
+            if (!$report.Contains($evidence)) { throw "Missing pluginval evidence: $evidence" }
+          }
       - name: Package Windows VST3 bundle
         shell: pwsh
         run: |
