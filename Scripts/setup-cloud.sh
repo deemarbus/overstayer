@@ -4,7 +4,7 @@ set -euo pipefail
 # Non-root bootstrap. Keep dependencies outside the application checkout.
 ivory_repo_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 ivory_tools_dir="${IVORY_TOOLS_DIR:-/workspace/.tools}"
-mkdir -p "$ivory_tools_dir"
+mkdir -p "$ivory_tools_dir/cache/fontconfig"
 python3 -m pip install --disable-pip-version-check --no-cache-dir --upgrade --target "$ivory_tools_dir/python" \
     cmake==3.31.6 ninja==1.11.1.4
 
@@ -20,6 +20,7 @@ fi
 cat > "$ivory_tools_dir/activate-ivory.sh" <<ACTIVATE
 export PATH="$ivory_tools_dir/python/cmake/data/bin:$ivory_tools_dir/python/bin:\$PATH"
 export IVORY_JUCE_PATH="$ivory_tools_dir/JUCE"
+export XDG_CACHE_HOME="$ivory_tools_dir/cache"
 ACTIVATE
 source "$ivory_tools_dir/activate-ivory.sh"
 cmake -S "$ivory_repo_dir" -B "$ivory_repo_dir/Builds/DSP" -G Ninja \

@@ -346,6 +346,9 @@ IvoryDriveAudioProcessorEditor::Knob& IvoryDriveAudioProcessorEditor::addKnob (
     control->setComponentID (id);
     auto& result = *control;
     surface->addAndMakeVisible (result);
+    // Slider caches its value Label when first constructed, before this knob
+    // joins the rack. Bind explicitly so it recreates that Label with rack ink.
+    result.slider.setLookAndFeel (&lookAndFeel);
     if (auto* parameter = processor.parameters.getParameter (id))
     {
         sliderAttachments.push_back (std::make_unique<SliderAttachment> (processor.parameters, id, result.slider));

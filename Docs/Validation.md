@@ -51,7 +51,24 @@ The checked-in [numerical report](ValidationArtifacts/report.json), [CSV measure
 
 `Tests/PluginTests.cpp` exercises the actual JUCE processor when plugin builds are enabled. It is responsible for dry/wet alignment and bypass latency, quality switching, oversampling alias rejection, preset/state recall and complete float/double block processing. Consult its executable output and generated measurements for actual results. Core results above must not be presented as host-wrapper validation.
 
-The Windows workflow builds the real VST3 bundle with Visual Studio 2022 and runs the executable tests. A release additionally needs Windows 11 installation into `C:\Program Files\Common Files\VST3\`, Ableton Live scan/load, audio and automation at several block sizes, mono/stereo routing, project/preset recall, bypass/quality transitions, HiDPI resizing, mouse/keyboard gestures and a listening pass. Neither a native Linux build nor compilation alone proves those DAW behaviors. Any pending Windows/host checks are stated in the top-level delivery notes.
+On 2026-10-17, the full native Linux CTest suite passed **2/2 tests**: 12 core groups and **1,583,935 processor assertions**, covering float/double, mono/stereo, the five requested sample rates, twelve factory presets, state restoration, bypass, fixed latency, oversampling and editor creation. The [actual CTest log](ValidationArtifacts/native-ctest.log) is retained. The core suite also passed with AddressSanitizer, UndefinedBehaviorSanitizer and leak detection enabled, without diagnostics; see [sanitizer output](ValidationArtifacts/core-sanitizers.log).
+
+The real compiled Linux VST3 bundle was separately loaded by **pluginval 1.0.4, strictness level 5**, and completed its GUI, audio, state, automation and bus tests with `SUCCESS`. Its [full console log](ValidationArtifacts/pluginval-linux.log) is retained. Pluginval skipped the external Steinberg VST3 validator because no validator executable path was configured; that external validator was not run. `auval` is not applicable to this VST3-only target.
+
+Measured host-wrapper results:
+
+| Quality | Third-harmonic alias at 18 kHz | Reduction versus 1x core | Full-wrapper CPU, one core |
+|---|---:|---:|---:|
+| 1x core comparison | −7.713 dBFS | — | — |
+| 2x | −69.505 dBFS | 61.791 dB | 4.51% |
+| 4x | −68.477 dBFS | 60.764 dB | 9.08% |
+| 8x | −90.965 dBFS | 83.251 dB | 17.95% |
+
+The alias test uses a deliberately driven 10 kHz sine at 48 kHz, peak input 0.6, +18 dB INPUT and AUTO GAIN off, and measures the folded third harmonic at 18 kHz. This is one reproducible stress signal, not a universal rejection guarantee. Different quality filters can produce a non-monotonic result for a particular folded component. The 1x row uses the raw core; it is not a selectable plugin setting. CPU values include the actual FIR wrapper with stereo float, DUAL/2ND, 48 kHz and 256-sample blocks, measured by wall clock on the shared cloud host; the benchmark loop also fills the sine stimulus buffers. These values are descriptive and do not predict Windows instance counts. See [raw alias measurements](ValidationArtifacts/plugin_oversampling.csv), [phase/CPU measurements](ValidationArtifacts/plugin_phase_cpu.csv), [alias plot](ValidationArtifacts/plugin_alias.png) and [parallel-phase plot](ValidationArtifacts/plugin_phase.png).
+
+All three quality choices, the dry branch, plugin bypass and host bypass share **65 samples** of latency. Small-signal phase tests at 100 Hz–20 kHz measured approximately 4.003° wet-phase difference at 100 Hz, consistent with the intentional 7 Hz DC blocker. At 1 kHz and above the difference was at most 0.402°; wet amplitude and 50% parallel-mix amplitude differed from unity by less than 0.01 dB. At 100 Hz, wet loss was at most 0.030 dB and parallel-mix loss at most 0.021 dB. Exact high-rate integer padding aligns the FIR conversion delay without an allpass phase correction.
+
+The Windows workflow builds the real VST3 bundle with Visual Studio 2022 and runs the executable tests; the Windows run was still pending when these native results were recorded. A release additionally needs Windows 11 installation into `C:\Program Files\Common Files\VST3\`, Ableton Live scan/load, audio and automation at several block sizes, mono/stereo routing, project/preset recall, bypass/quality transitions, HiDPI resizing, mouse/keyboard gestures and a listening pass. Native Linux validation does not establish those Windows/DAW behaviors. Any later Windows results are stated in the top-level delivery notes.
 
 ## Optional licensed-reference comparison
 

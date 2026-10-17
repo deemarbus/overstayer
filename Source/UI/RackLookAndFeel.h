@@ -83,6 +83,14 @@ public:
         label->setFont (lettering (10.5f));
         label->setJustificationType (juce::Justification::centred);
         label->setBorderSize (juce::BorderSize<int> (0));
+        label->setColour (juce::Label::textColourId, palette::ink());
+        label->setColour (juce::Label::backgroundColourId, palette::panelLight().withAlpha (0.38f));
+        label->setColour (juce::Label::outlineColourId, palette::outline().withAlpha (0.72f));
+        label->setColour (juce::TextEditor::textColourId, palette::ink());
+        label->setColour (juce::TextEditor::backgroundColourId, palette::panelLight());
+        label->setColour (juce::TextEditor::outlineColourId, palette::outline());
+        label->setColour (juce::TextEditor::highlightColourId, palette::accent().withAlpha (0.25f));
+        label->setColour (juce::TextEditor::highlightedTextColourId, palette::ink());
         return label;
     }
 

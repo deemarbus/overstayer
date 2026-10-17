@@ -108,6 +108,7 @@ public:
             maximumLatency = juce::jmax(maximumLatency, path.latency);
             path.engine.prepare(sampleRate * static_cast<double>(1u << (quality + 1)), channels);
             path.engine.setParameters(initialParameters);
+            path.engine.reset();
         }
         for (auto& path : paths) path.alignment.prepare(maximumLatency - path.latency);
         dryDelay.prepare(maximumLatency);

@@ -1,0 +1,52 @@
+Start testing: Oct 17 13:38 UTC
+----------------------------------------------------------
+1/2 Testing: independent_dsp
+1/2 Test: independent_dsp
+Command: "/workspace/overstayer/Builds/Linux/IvoryDspTests"
+Directory: /workspace/overstayer/Builds/Linux
+"independent_dsp" start time: Oct 17 13:38 UTC
+Output:
+----------------------------------------------------------
+PASS harmonic drive, 2ND and DUAL
+PASS six nonlinear emphasis profiles
+PASS Extended compensation, independent bands and filters
+PASS input/auto gain calibration and transient peak rounding
+PASS all requested rates and extreme automation / float
+PASS all requested rates and extreme automation / double
+PASS impulse, mono equivalence and stereo independence
+PASS subnormal handling / float
+PASS subnormal handling / double
+PASS nonlinear activity metering
+PASS CPU measurements / float
+PASS CPU measurements / double
+12 passed, 0 failed; measurements: "validation"
+<end of output>
+Test time =   1.53 sec
+----------------------------------------------------------
+Test Passed.
+"independent_dsp" end time: Oct 17 13:38 UTC
+"independent_dsp" time elapsed: 00:00:01
+----------------------------------------------------------
+
+2/2 Testing: plugin_integration
+2/2 Test: plugin_integration
+Command: "/workspace/overstayer/Builds/Linux/IvoryPluginTests"
+Directory: /workspace/overstayer/Builds/Linux
+"plugin_integration" start time: Oct 17 13:38 UTC
+Output:
+----------------------------------------------------------
+Latency: 65 samples (all qualities, dry and both bypass paths)
+Latency: 65 samples (all qualities, dry and both bypass paths)
+2x full stereo float wrapper: 4.7102% of one cloud CPU (wall clock)
+4x full stereo float wrapper: 9.19828% of one cloud CPU (wall clock)
+8x full stereo float wrapper: 22.4106% of one cloud CPU (wall clock)
+PASS: 1583935 processor assertions; float/double, mono/stereo, 5 rates, 12 presets, state, bypass, latency, oversampling, editor.
+<end of output>
+Test time =   2.88 sec
+----------------------------------------------------------
+Test Passed.
+"plugin_integration" end time: Oct 17 13:38 UTC
+"plugin_integration" time elapsed: 00:00:02
+----------------------------------------------------------
+
+End testing: Oct 17 13:38 UTC

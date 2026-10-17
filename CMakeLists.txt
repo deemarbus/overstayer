@@ -71,17 +71,18 @@ if(IVORY_BUILD_PLUGIN)
     target_compile_definitions(IvoryDrive PUBLIC
         JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0
         JUCE_VST3_CAN_REPLACE_VST2=0)
-    target_link_libraries(IvoryDrive PUBLIC
+    target_link_libraries(IvoryDrive PRIVATE
         juce::juce_audio_utils juce::juce_dsp
-        PRIVATE juce::juce_recommended_config_flags
+        juce::juce_recommended_config_flags
         juce::juce_recommended_warning_flags)
     if(MSVC)
         target_compile_options(IvoryDrive PRIVATE /utf-8)
     endif()
 
     if(IVORY_BUILD_TESTS)
-        juce_add_console_app(IvoryPluginTests PRODUCT_NAME "Ivory Drive Processor Tests")
-        target_sources(IvoryPluginTests PRIVATE Tests/PluginTests.cpp)
+        add_executable(IvoryPluginTests Tests/PluginTests.cpp)
+        target_include_directories(IvoryPluginTests PRIVATE
+            $<TARGET_PROPERTY:IvoryDrive,INCLUDE_DIRECTORIES>)
         target_link_libraries(IvoryPluginTests PRIVATE IvoryDrive)
         add_test(NAME plugin_integration COMMAND IvoryPluginTests)
         set_tests_properties(plugin_integration PROPERTIES TIMEOUT 180)

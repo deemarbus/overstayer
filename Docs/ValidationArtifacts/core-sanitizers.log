@@ -1,0 +1,13 @@
+PASS harmonic drive, 2ND and DUAL
+PASS six nonlinear emphasis profiles
+PASS Extended compensation, independent bands and filters
+PASS input/auto gain calibration and transient peak rounding
+PASS all requested rates and extreme automation / float
+PASS all requested rates and extreme automation / double
+PASS impulse, mono equivalence and stereo independence
+PASS subnormal handling / float
+PASS subnormal handling / double
+PASS nonlinear activity metering
+PASS CPU measurements / float
+PASS CPU measurements / double
+12 passed, 0 failed; measurements: "/tmp/ivory-validation-sanitized"

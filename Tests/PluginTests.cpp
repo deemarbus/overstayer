@@ -249,7 +249,10 @@ void editorSmoke()
     editor->paintEntireComponent(graphics, true);
     const auto file = juce::File::getCurrentWorkingDirectory().getChildFile("IvoryDrive-Classic.png");
     if (auto stream = file.createOutputStream())
+    {
+        require(stream->setPosition(0) && stream->truncate().wasOk(), "Classic screenshot truncate failed");
         require(juce::PNGImageFormat().writeImageToStream(image, *stream), "Classic screenshot encode failed");
+    }
     else require(false, "Could not save editor screenshot");
     parameter(processor, "extended", 1.0f);
     // Timer-driven layout updates need message dispatch; the synchronous
@@ -260,7 +263,11 @@ void editorSmoke()
     juce::Graphics extendedGraphics(extended);
     editor->paintEntireComponent(extendedGraphics, true);
     if (auto stream = juce::File::getCurrentWorkingDirectory().getChildFile("IvoryDrive-Extended.png").createOutputStream())
+    {
+        require(stream->setPosition(0) && stream->truncate().wasOk(), "Extended screenshot truncate failed");
         require(juce::PNGImageFormat().writeImageToStream(extended, *stream), "Extended screenshot encode failed");
+    }
+    else require(false, "Could not save Extended editor screenshot");
     editor.reset();
 }
 
