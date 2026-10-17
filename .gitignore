@@ -1,0 +1,16 @@
+/Builds/
+/build/
+/build-*/
+/out/
+/.vs/
+/.vscode/
+/JUCE/
+/_deps/
+/TestResults/
+*.user
+*.suo
+*.VC.db
+*.vst3
+*.zip
+__pycache__/
+.DS_Store

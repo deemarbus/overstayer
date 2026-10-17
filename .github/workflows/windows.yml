@@ -1,0 +1,59 @@
+name: Windows VST3
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  msvc-vst3:
+    runs-on: windows-2022
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure MSVC x64
+        run: cmake --preset windows-vs2022
+      - name: Build plugin and validation
+        run: cmake --build --preset windows-release
+      - name: Run DSP and processor tests
+        run: ctest --preset windows-release --output-junit TestResults/windows.xml
+      - name: Validate the Windows VST3 wrapper
+        shell: pwsh
+        run: |
+          Invoke-WebRequest "https://github.com/Tracktion/pluginval/releases/download/v1.0.4/pluginval_Windows.zip" -OutFile pluginval.zip
+          $expected = "C08E61CE3B96DB41636F8EC7E76F4C7E2C13EBDAC7FA1B5A1F52B4F32EC715AB"
+          if ((Get-FileHash pluginval.zip -Algorithm SHA256).Hash -ne $expected) { throw "pluginval checksum mismatch" }
+          Expand-Archive pluginval.zip -DestinationPath pluginval
+          New-Item -ItemType Directory -Force -Path TestResults/pluginval | Out-Null
+          & ./pluginval/pluginval.exe --strictness-level 5 --random-seed 0x1A0D --timeout-ms 120000 --output-dir TestResults/pluginval --validate "Builds/Windows/IvoryDrive_artefacts/Release/VST3/Ivory Drive.vst3"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Package Windows VST3 bundle
+        shell: pwsh
+        run: |
+          $bundle = "Builds/Windows/IvoryDrive_artefacts/Release/VST3/Ivory Drive.vst3"
+          if (!(Test-Path "$bundle/Contents/x86_64-win/Ivory Drive.vst3")) { throw "Windows VST3 binary missing" }
+          New-Item -ItemType Directory -Force -Path release | Out-Null
+          Copy-Item -Recurse $bundle release/
+          Copy-Item README.md release/
+          Copy-Item -Recurse Docs release/
+          Compress-Archive -Path "release/*" -DestinationPath IvoryDrive-Windows-x64.zip
+      - name: Upload Windows release candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: IvoryDrive-Windows-x64
+          path: IvoryDrive-Windows-x64.zip
+          if-no-files-found: error
+      - name: Upload validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows-validation
+          path: |
+            TestResults/
+            Builds/Windows/Testing/
+            Builds/Windows/*metrics*
+          if-no-files-found: warn

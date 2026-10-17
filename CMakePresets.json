@@ -1,0 +1,29 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 22, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "windows-vs2022",
+      "displayName": "Windows x64 / Visual Studio 2022",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/Builds/Windows",
+      "cacheVariables": { "IVORY_BUILD_PLUGIN": "ON", "IVORY_BUILD_TESTS": "ON" }
+    },
+    {
+      "name": "dsp-only",
+      "displayName": "Independent DSP validation",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/Builds/DSP",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release", "IVORY_BUILD_PLUGIN": "OFF", "IVORY_BUILD_TESTS": "ON" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "windows-release", "configurePreset": "windows-vs2022", "configuration": "Release", "jobs": 2 },
+    { "name": "dsp-tests", "configurePreset": "dsp-only", "jobs": 2 }
+  ],
+  "testPresets": [
+    { "name": "windows-release", "configurePreset": "windows-vs2022", "configuration": "Release", "output": { "outputOnFailure": true } },
+    { "name": "dsp-tests", "configurePreset": "dsp-only", "output": { "outputOnFailure": true } }
+  ]
+}

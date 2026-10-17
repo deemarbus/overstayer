@@ -1,0 +1,271 @@
+{
+  "measurements": [
+    {
+      "test": "saturation",
+      "metric": "quiet_thd",
+      "value": 0.00688198811284,
+      "unit": "percent"
+    },
+    {
+      "test": "saturation",
+      "metric": "moderate_thd",
+      "value": 3.18466290875,
+      "unit": "percent"
+    },
+    {
+      "test": "saturation",
+      "metric": "loud_thd",
+      "value": 11.1873603995,
+      "unit": "percent"
+    },
+    {
+      "test": "second",
+      "metric": "normal_even_odd_ratio",
+      "value": 0.0630469129209,
+      "unit": "ratio"
+    },
+    {
+      "test": "second",
+      "metric": "enabled_even_odd_ratio",
+      "value": 1.68105467643,
+      "unit": "ratio"
+    },
+    {
+      "test": "dual",
+      "metric": "normalized_harmonic_difference",
+      "value": 0.0495836017779,
+      "unit": "ratio"
+    },
+    {
+      "test": "dual",
+      "metric": "second_harmonic_change",
+      "value": 10.1332380547,
+      "unit": "dB"
+    },
+    {
+      "test": "classic_modes",
+      "metric": "minimum_pairwise_waveform_difference",
+      "value": 0.0445290037742,
+      "unit": "ratio"
+    },
+    {
+      "test": "classic_modes",
+      "metric": "mode_1_thd",
+      "value": 9.97656588831,
+      "unit": "percent"
+    },
+    {
+      "test": "classic_modes",
+      "metric": "mode_2_thd",
+      "value": 1.53108623808,
+      "unit": "percent"
+    },
+    {
+      "test": "classic_modes",
+      "metric": "mode_3_thd",
+      "value": 5.01570016005,
+      "unit": "percent"
+    },
+    {
+      "test": "classic_modes",
+      "metric": "mode_4_thd",
+      "value": 4.63062088864,
+      "unit": "percent"
+    },
+    {
+      "test": "classic_modes",
+      "metric": "mode_5_thd",
+      "value": 4.09843460384,
+      "unit": "percent"
+    },
+    {
+      "test": "classic_modes",
+      "metric": "mode_6_thd",
+      "value": 5.08329621856,
+      "unit": "percent"
+    },
+    {
+      "test": "extended_comp",
+      "metric": "worst_linear_response_error",
+      "value": 1.30182665071e-09,
+      "unit": "dB"
+    },
+    {
+      "test": "extended_bands",
+      "metric": "band_1_pre_post_difference",
+      "value": 0.605748129309,
+      "unit": "ratio"
+    },
+    {
+      "test": "extended_bands",
+      "metric": "band_2_pre_post_difference",
+      "value": 0.945605585562,
+      "unit": "ratio"
+    },
+    {
+      "test": "extended_bands",
+      "metric": "band_3_pre_post_difference",
+      "value": 0.945514559043,
+      "unit": "ratio"
+    },
+    {
+      "test": "extended_bands",
+      "metric": "band_4_pre_post_difference",
+      "value": 0.581801031271,
+      "unit": "ratio"
+    },
+    {
+      "test": "filters",
+      "metric": "hp_two_octaves_below_cutoff",
+      "value": -24.1003372624,
+      "unit": "dB"
+    },
+    {
+      "test": "filters",
+      "metric": "lp_two_octaves_above_cutoff",
+      "value": -25.6920532271,
+      "unit": "dB"
+    },
+    {
+      "test": "filters",
+      "metric": "hp_max_resonance_at_cutoff",
+      "value": 2.27722716679,
+      "unit": "dB"
+    },
+    {
+      "test": "filters",
+      "metric": "lp_max_resonance_at_cutoff",
+      "value": 2.27863152955,
+      "unit": "dB"
+    },
+    {
+      "test": "extended_master_enable",
+      "metric": "disabled_filters_and_eq_residual",
+      "value": 0.0,
+      "unit": "ratio"
+    },
+    {
+      "test": "gain",
+      "metric": "input_12db_small_signal_gain",
+      "value": 11.9999996805,
+      "unit": "dB"
+    },
+    {
+      "test": "gain",
+      "metric": "autogain_12db_small_signal_gain",
+      "value": -2.27528005994e-07,
+      "unit": "dB"
+    },
+    {
+      "test": "transient",
+      "metric": "input_crest",
+      "value": 20.9367012036,
+      "unit": "dB"
+    },
+    {
+      "test": "transient",
+      "metric": "wet_crest",
+      "value": 9.28791450761,
+      "unit": "dB"
+    },
+    {
+      "test": "automation_float",
+      "metric": "maximum_absolute_output",
+      "value": 1.15019202232,
+      "unit": "linear"
+    },
+    {
+      "test": "automation_double",
+      "metric": "maximum_absolute_output",
+      "value": 1.1501921605,
+      "unit": "linear"
+    },
+    {
+      "test": "impulse",
+      "metric": "tail_at_750ms",
+      "value": 2.96116138678e-18,
+      "unit": "linear"
+    },
+    {
+      "test": "activity",
+      "metric": "quiet",
+      "value": 3.53715813617e-06,
+      "unit": "linear"
+    },
+    {
+      "test": "activity",
+      "metric": "driven",
+      "value": 0.303424447775,
+      "unit": "linear"
+    },
+    {
+      "test": "cpu_float",
+      "metric": "stereo_base_rate_realtime_percent",
+      "value": 2.27152518,
+      "unit": "percent_one_core"
+    },
+    {
+      "test": "cpu_float",
+      "metric": "nanoseconds_per_channel_sample",
+      "value": 236.61720625,
+      "unit": "ns"
+    },
+    {
+      "test": "cpu_float",
+      "metric": "checksum",
+      "value": 90.9925199085,
+      "unit": "linear"
+    },
+    {
+      "test": "cpu_double",
+      "metric": "stereo_base_rate_realtime_percent",
+      "value": 1.60904727,
+      "unit": "percent_one_core"
+    },
+    {
+      "test": "cpu_double",
+      "metric": "nanoseconds_per_channel_sample",
+      "value": 167.609090625,
+      "unit": "ns"
+    },
+    {
+      "test": "cpu_double",
+      "metric": "checksum",
+      "value": 90.9925518553,
+      "unit": "linear"
+    }
+  ],
+  "impulse_fixture": {
+    "frames": 48000,
+    "channels": 1,
+    "rms_dbfs": -49.957085554737276,
+    "peak_dbfs": -3.146802393530978,
+    "crest_factor_db": 46.8102831612063,
+    "dc_mean": [
+      1.0207295417785645e-09
+    ],
+    "max_sample_step": 0.6980422735214233
+  },
+  "transient_input_fixture": {
+    "frames": 48000,
+    "channels": 1,
+    "rms_dbfs": -21.112180736834397,
+    "peak_dbfs": -0.1754793736690621,
+    "crest_factor_db": 20.936701363165334,
+    "dc_mean": [
+      0.0009044678832093875
+    ],
+    "max_sample_step": 0.2135998010635376
+  },
+  "transient_wet_fixture": {
+    "frames": 48000,
+    "channels": 1,
+    "rms_dbfs": -21.740930954220833,
+    "peak_dbfs": -12.45301569038454,
+    "crest_factor_db": 9.287915263836293,
+    "dc_mean": [
+      8.60594908396403e-05
+    ],
+    "max_sample_step": 0.2656519412994385
+  }
+}
